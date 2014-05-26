@@ -1,0 +1,6 @@
+###WHATS_MY_IP - CHANGELOG###
+
+
+## v1.2.0
++Ping-Hoster ist jetzt benutzerdefinierbahr
++Fehler werden nun auffälliger angezeigt
