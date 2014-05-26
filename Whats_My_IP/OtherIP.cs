@@ -24,5 +24,11 @@ namespace Whats_My_IP
 			//
 			InitializeComponent();
 		}
+		
+		void Button_OKClick(object sender, EventArgs e)
+		{
+			MainForm.aIP = textBox_IP.Text;
+			this.Close();
+		}
 	}
 }

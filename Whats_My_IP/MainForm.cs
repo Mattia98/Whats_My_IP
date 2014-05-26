@@ -18,7 +18,9 @@ using System.Net.NetworkInformation;
 namespace Whats_My_IP
 {
 	/// <summary>
-	/// Description of MainForm.
+	/// MainForm ist die Hauptform des Programmes.
+	/// Hier wird die Hauptarbeit gemacht.
+	/// Die anderen Formen dienen nur zur Informationsbeschaffung über den Benutzer.
 	/// </summary>
 	public partial class MainForm : Form
 	{
@@ -29,10 +31,12 @@ namespace Whats_My_IP
 			//
 			InitializeComponent();
 		}
-		string[] aInfo = new string[4];
+		string[] aInfo = new string[4];//Gesplittete Json-Datei
 		string aHost = "http://ip-api.com/json";//Json-Hoster
 		public static string bHost = "www.google.com";//Ping-Hoster
-		int aPing;
+		public static string aIP;//Benutzerdefinierte IP-Adresse
+		public static bool aAnalisiere = true;//Soll Programm IP vom Web holen(false). Soll Programm IP analisieren(true).
+		int aPing;//Ping von GetPing()
 		
 		
 		void MainFormLoad(object sender, EventArgs e)
@@ -45,17 +49,19 @@ namespace Whats_My_IP
 		void Button_GetIPClick(object sender, EventArgs e)
 		{
 			button_GetIP.Enabled = false;
+			if(aAnalisiere)
+				aHost = aHost+"/"+aIP;//Füge benutzerdefinierte IP-Adresse
 			backgroundWorker_GetIP.RunWorkerAsync();
 			
 		}
 		
 		string GetJson(string host)
 		{
-			string bIP;
+			string IP;
 			using(WebClient client = new WebClient()) {
-  					bIP = client.DownloadString(host);
+  					IP = client.DownloadString(host);
 				}
-			return bIP;
+			return IP;
 		}
 		
 		void ConvertJson(string json)
@@ -105,39 +111,35 @@ namespace Whats_My_IP
 				toolStripStatusLabel_Status.Text = "Teste Ping über \""+bHost+"\"...";
 				aPing = GetPing();
 				toolStripStatusLabel_Status.Text = "OK! ("+aPing.ToString()+" ms)";
-				//
+				//OK
 				toolStripStatusLabel_Status.Text = "Fertig! (Json-Host: \""+aHost+"\", Ping-Host: \""+bHost+"\")";
 			}
 			catch (Exception ex) 
 			{
 				toolStripStatusLabel_Status.Text = "Fehler: "+ ex.Message;
 				MessageBox.Show(ex.Message, "Fehler!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				aHost="http://ip-api.com/json";
 			}
 			
 		}
 		
 		void BackgroundWorker_GetIPRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			if(e.Error != null)
-			{
-				MessageBox.Show(e.Error.Message, "Fehler!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-			else
-			{
-				RefreshUI();
-			}
+			RefreshUI();
+			aHost="http://ip-api.com/json";
 			button_GetIP.Enabled = true;
 		}
 		
-		void Button_PingHostClick(object sender, EventArgs e)
+		void Button_PingHostClick(object sender, EventArgs e)//Öffne den PingHost-Form um den PingHost vom Benutzer zu krigen.
 		{
 			PingHost ph = new PingHost();
 			ph.Show();
 		}
 		
-		void Button_AnalizeClick(object sender, EventArgs e)
+		void Button_AnalizeClick(object sender, EventArgs e)//Öffne den OtherIP-Form um eine zu analisierende IP-Adresse zu krigen.
 		{
-			
+			OtherIP oip = new OtherIP();
+			oip.Show();
 		}
 	}
 }

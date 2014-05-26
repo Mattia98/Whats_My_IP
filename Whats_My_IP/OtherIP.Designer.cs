@@ -38,10 +38,10 @@ namespace Whats_My_IP
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OtherIP));
 			this.button_OK = new System.Windows.Forms.Button();
-			this.groupBox_PingBx = new System.Windows.Forms.GroupBox();
-			this.textBox_Ping = new System.Windows.Forms.TextBox();
-			this.label_IP = new System.Windows.Forms.Label();
-			this.groupBox_PingBx.SuspendLayout();
+			this.groupBox_IPBx = new System.Windows.Forms.GroupBox();
+			this.textBox_IP = new System.Windows.Forms.TextBox();
+			this.label_Info = new System.Windows.Forms.Label();
+			this.groupBox_IPBx.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// button_OK
@@ -52,35 +52,34 @@ namespace Whats_My_IP
 			this.button_OK.TabIndex = 7;
 			this.button_OK.Text = "OK";
 			this.button_OK.UseVisualStyleBackColor = true;
+			this.button_OK.Click += new System.EventHandler(this.Button_OKClick);
 			// 
-			// groupBox_PingBx
+			// groupBox_IPBx
 			// 
-			this.groupBox_PingBx.Controls.Add(this.textBox_Ping);
-			this.groupBox_PingBx.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.groupBox_PingBx.Location = new System.Drawing.Point(12, 12);
-			this.groupBox_PingBx.Name = "groupBox_PingBx";
-			this.groupBox_PingBx.Size = new System.Drawing.Size(386, 73);
-			this.groupBox_PingBx.TabIndex = 6;
-			this.groupBox_PingBx.TabStop = false;
-			this.groupBox_PingBx.Text = "Ping hoster (z.B. \"www.google.com\"):";
+			this.groupBox_IPBx.Controls.Add(this.textBox_IP);
+			this.groupBox_IPBx.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.groupBox_IPBx.Location = new System.Drawing.Point(12, 12);
+			this.groupBox_IPBx.Name = "groupBox_IPBx";
+			this.groupBox_IPBx.Size = new System.Drawing.Size(386, 73);
+			this.groupBox_IPBx.TabIndex = 6;
+			this.groupBox_IPBx.TabStop = false;
+			this.groupBox_IPBx.Text = "Zu analysirende IP:";
 			// 
-			// textBox_Ping
+			// textBox_IP
 			// 
-			this.textBox_Ping.Location = new System.Drawing.Point(6, 32);
-			this.textBox_Ping.Name = "textBox_Ping";
-			this.textBox_Ping.Size = new System.Drawing.Size(365, 33);
-			this.textBox_Ping.TabIndex = 0;
-			this.textBox_Ping.Text = "www.google.com";
+			this.textBox_IP.Location = new System.Drawing.Point(6, 32);
+			this.textBox_IP.Name = "textBox_IP";
+			this.textBox_IP.Size = new System.Drawing.Size(365, 33);
+			this.textBox_IP.TabIndex = 0;
 			// 
-			// label_IP
+			// label_Info
 			// 
-			this.label_IP.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label_IP.Location = new System.Drawing.Point(93, 91);
-			this.label_IP.Name = "label_IP";
-			this.label_IP.Size = new System.Drawing.Size(305, 23);
-			this.label_IP.TabIndex = 8;
-			this.label_IP.Text = "Achtung: Nicht alle Seiten können gepingt werden!";
-			this.label_IP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.label_Info.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label_Info.Location = new System.Drawing.Point(93, 91);
+			this.label_Info.Name = "label_Info";
+			this.label_Info.Size = new System.Drawing.Size(305, 23);
+			this.label_Info.TabIndex = 8;
+			this.label_Info.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// OtherIP
 			// 
@@ -88,8 +87,8 @@ namespace Whats_My_IP
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(409, 124);
 			this.Controls.Add(this.button_OK);
-			this.Controls.Add(this.groupBox_PingBx);
-			this.Controls.Add(this.label_IP);
+			this.Controls.Add(this.groupBox_IPBx);
+			this.Controls.Add(this.label_Info);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
@@ -97,13 +96,13 @@ namespace Whats_My_IP
 			this.Name = "OtherIP";
 			this.ShowInTaskbar = false;
 			this.Text = "IP Wählen";
-			this.groupBox_PingBx.ResumeLayout(false);
-			this.groupBox_PingBx.PerformLayout();
+			this.groupBox_IPBx.ResumeLayout(false);
+			this.groupBox_IPBx.PerformLayout();
 			this.ResumeLayout(false);
 		}
-		private System.Windows.Forms.Label label_IP;
-		private System.Windows.Forms.TextBox textBox_Ping;
-		private System.Windows.Forms.GroupBox groupBox_PingBx;
+		private System.Windows.Forms.Label label_Info;
+		private System.Windows.Forms.TextBox textBox_IP;
+		private System.Windows.Forms.GroupBox groupBox_IPBx;
 		private System.Windows.Forms.Button button_OK;
 	}
 }
