@@ -41,27 +41,33 @@ namespace Whats_My_IP
 		
 		void MainFormLoad(object sender, EventArgs e)
 		{
-			button_GetIP.Enabled = false;
-			backgroundWorker_GetIP.RunWorkerAsync();
-			
+			Main();
 		}
 		
 		void Button_GetIPClick(object sender, EventArgs e)
 		{
-			button_GetIP.Enabled = false;
-			if(aAnalisiere)
-				aHost = aHost+"/"+aIP;//Füge benutzerdefinierte IP-Adresse
-			backgroundWorker_GetIP.RunWorkerAsync();
-			
+			Main();
 		}
 		
 		string GetJson(string host)
 		{
-			string IP;
+			string Json;
 			using(WebClient client = new WebClient()) {
-  					IP = client.DownloadString(host);
+  					Json = client.DownloadString(host);
 				}
-			return IP;
+			return Json;
+		}
+		
+		public void Main()
+		{
+			InvertButtonStatus();
+			
+			backgroundWorker_Main.RunWorkerAsync();
+		}
+		
+		void InvertButtonStatus()
+		{
+			
 		}
 		
 		void ConvertJson(string json)
@@ -81,8 +87,20 @@ namespace Whats_My_IP
 		int GetPing()
 		{
 			int ping;
-			using (Ping p = new Ping()) {
-				ping = Convert.ToInt32(p.Send(bHost).RoundtripTime);
+			using (Ping p = new Ping()) 
+			{
+				int[] pings = new int[10];
+				int zwischensumme = 0;
+				for (int i = 0; i < pings.Length; i++)
+				{
+					pings[i] = Convert.ToInt32(p.Send(bHost).RoundtripTime);
+					toolStripStatusLabel_Status.Text = "Teste Ping über \""+bHost+"\"... ("+i.ToString()+" von 10)";
+				}
+				for (int i = 0; i < pings.Length; i++) 
+				{
+					zwischensumme = zwischensumme+pings[i];
+				}
+				ping = zwischensumme/pings.Length;
 			}
 			return ping;
 		}
@@ -96,12 +114,12 @@ namespace Whats_My_IP
 			pictureBox_Flag.ImageLocation = "http://flagpedia.net/data/flags/small/"+aInfo[2].ToLower()+".png";
 		}
 		
-		void BackgroundWorker_GetIPDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+		void BackgroundWorker_MainDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			BackgroundWorker worker = sender as BackgroundWorker;
 			
-			try 
-			{
+			/*try 
+			{*/
 				//Hole und konvertiere die Json
 				toolStripStatusLabel_Status.Text = "Hole Json-Datei von \""+aHost+"\"...";
 				string[] aInfo = new string[3];
@@ -113,21 +131,27 @@ namespace Whats_My_IP
 				toolStripStatusLabel_Status.Text = "OK! ("+aPing.ToString()+" ms)";
 				//OK
 				toolStripStatusLabel_Status.Text = "Fertig! (Json-Host: \""+aHost+"\", Ping-Host: \""+bHost+"\")";
-			}
+			/*}
 			catch (Exception ex) 
 			{
-				toolStripStatusLabel_Status.Text = "Fehler: "+ ex.Message;
-				MessageBox.Show(ex.Message, "Fehler!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				aHost="http://ip-api.com/json";
-			}
+			
+			}*/
 			
 		}
 		
-		void BackgroundWorker_GetIPRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		void BackgroundWorker_MainRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			RefreshUI();
+			if(e.Error == null)
+			{
+				RefreshUI();
+				button_GetIP.Enabled = true;
+			}
+			else
+			{
+				toolStripStatusLabel_Status.Text = "Fehler: "+ e.Error.Message;
+				MessageBox.Show(e.Error.Message, "Fehler!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 			aHost="http://ip-api.com/json";
-			button_GetIP.Enabled = true;
 		}
 		
 		void Button_PingHostClick(object sender, EventArgs e)//Öffne den PingHost-Form um den PingHost vom Benutzer zu krigen.

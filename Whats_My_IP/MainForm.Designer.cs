@@ -43,7 +43,7 @@ namespace Whats_My_IP
 			this.statusStrip_Main = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel_Status = new System.Windows.Forms.ToolStripStatusLabel();
 			this.button_GetIP = new System.Windows.Forms.Button();
-			this.backgroundWorker_GetIP = new System.ComponentModel.BackgroundWorker();
+			this.backgroundWorker_Main = new System.ComponentModel.BackgroundWorker();
 			this.groupBox_ISPBox = new System.Windows.Forms.GroupBox();
 			this.label_ISP = new System.Windows.Forms.Label();
 			this.groupBox_LocationBox = new System.Windows.Forms.GroupBox();
@@ -120,10 +120,10 @@ namespace Whats_My_IP
 			this.button_GetIP.UseVisualStyleBackColor = true;
 			this.button_GetIP.Click += new System.EventHandler(this.Button_GetIPClick);
 			// 
-			// backgroundWorker_GetIP
+			// backgroundWorker_Main
 			// 
-			this.backgroundWorker_GetIP.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_GetIPDoWork);
-			this.backgroundWorker_GetIP.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_GetIPRunWorkerCompleted);
+			this.backgroundWorker_Main.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_MainDoWork);
+			this.backgroundWorker_Main.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_MainRunWorkerCompleted);
 			// 
 			// groupBox_ISPBox
 			// 
@@ -260,7 +260,7 @@ namespace Whats_My_IP
 		private System.Windows.Forms.GroupBox groupBox_LocationBox;
 		private System.Windows.Forms.Label label_ISP;
 		private System.Windows.Forms.GroupBox groupBox_ISPBox;
-		private System.ComponentModel.BackgroundWorker backgroundWorker_GetIP;
+		private System.ComponentModel.BackgroundWorker backgroundWorker_Main;
 		private System.Windows.Forms.Button button_GetIP;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_Status;
 		private System.Windows.Forms.StatusStrip statusStrip_Main;
