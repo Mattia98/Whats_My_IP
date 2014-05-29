@@ -41,12 +41,12 @@ namespace Whats_My_IP
 		
 		void MainFormLoad(object sender, EventArgs e)
 		{
-			Main();
+			Go();
 		}
 		
 		void Button_GetIPClick(object sender, EventArgs e)
 		{
-			Main();
+			Go();
 		}
 		
 		string GetJson(string host)
@@ -58,8 +58,9 @@ namespace Whats_My_IP
 			return Json;
 		}
 		
-		public void Main()
+		public void Go()
 		{
+			
 			InvertButtonStatus();
 			
 			backgroundWorker_Main.RunWorkerAsync();
@@ -67,7 +68,18 @@ namespace Whats_My_IP
 		
 		void InvertButtonStatus()
 		{
-			
+			if(button_Go.Enabled)
+			{
+				button_Go.Enabled = false;
+				button_PingHost.Enabled = false;
+				button_Analize.Enabled = false;
+			}
+			else
+			{
+				button_Go.Enabled = true;
+				button_PingHost.Enabled = true;
+				button_Analize.Enabled = true;
+			}
 		}
 		
 		void ConvertJson(string json)
@@ -91,9 +103,12 @@ namespace Whats_My_IP
 			{
 				int[] pings = new int[10];
 				int zwischensumme = 0;
-				for (int i = 0; i < pings.Length; i++)
+				MessageBox.Show(pings.Length.ToString());
+				for (int i = 0; i == pings.Length; i++)
 				{
 					pings[i] = Convert.ToInt32(p.Send(bHost).RoundtripTime);
+					if(pings[1]==0)
+						break;
 					toolStripStatusLabel_Status.Text = "Teste Ping über \""+bHost+"\"... ("+i.ToString()+" von 10)";
 				}
 				for (int i = 0; i < pings.Length; i++) 
@@ -110,7 +125,11 @@ namespace Whats_My_IP
 			label_IP.Text = aInfo[0];
 			label_ISP.Text = aInfo[3];
 			label_Location.Text = aInfo[1];
-			label_Ping.Text = aPing.ToString()+" ms";
+			if(aPing==0)
+				label_Ping.Text = "Kein Ping!";
+			else
+				label_Ping.Text = aPing.ToString()+" ms";
+			
 			pictureBox_Flag.ImageLocation = "http://flagpedia.net/data/flags/small/"+aInfo[2].ToLower()+".png";
 		}
 		
@@ -144,7 +163,7 @@ namespace Whats_My_IP
 			if(e.Error == null)
 			{
 				RefreshUI();
-				button_GetIP.Enabled = true;
+				InvertButtonStatus();
 			}
 			else
 			{

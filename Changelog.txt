@@ -1,5 +1,10 @@
 ﻿###WHATS_MY_IP - CHANGELOG###
 
+## v1.3.2 (BETA)
+!Unfunktionierende Ping-Hoster werden übersprungen (ACHTUNG: Nicht fertig, ping funkt nicht mehr!!)
++Refaktoring
+
+
 ## v1.3.1 (BETA)
 +Ping wird 10 mal durchgeführt und am Ende gedurchnittlicht
 !Programm crasht wenn keine Internetverbindung besteht
