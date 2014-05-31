@@ -41,20 +41,35 @@ namespace Whats_My_IP
 		
 		void MainFormLoad(object sender, EventArgs e)
 		{
+<<<<<<< HEAD
 			Go();
+=======
+			button_GetIP.Enabled = false;
+			backgroundWorker_GetIP.RunWorkerAsync();
+			
+>>>>>>> parent of b3eefd5... v1.3.1 BETA
 		}
 		
 		void Button_GetIPClick(object sender, EventArgs e)
 		{
+<<<<<<< HEAD
 			Go();
+=======
+			button_GetIP.Enabled = false;
+			if(aAnalisiere)
+				aHost = aHost+"/"+aIP;//Füge benutzerdefinierte IP-Adresse
+			backgroundWorker_GetIP.RunWorkerAsync();
+			
+>>>>>>> parent of b3eefd5... v1.3.1 BETA
 		}
 		
 		string GetJson(string host)
 		{
-			string Json;
+			string IP;
 			using(WebClient client = new WebClient()) {
-  					Json = client.DownloadString(host);
+  					IP = client.DownloadString(host);
 				}
+<<<<<<< HEAD
 			return Json;
 		}
 		
@@ -80,6 +95,9 @@ namespace Whats_My_IP
 				button_PingHost.Enabled = true;
 				button_Analize.Enabled = true;
 			}
+=======
+			return IP;
+>>>>>>> parent of b3eefd5... v1.3.1 BETA
 		}
 		
 		void ConvertJson(string json)
@@ -99,6 +117,7 @@ namespace Whats_My_IP
 		int GetPing()
 		{
 			int ping;
+<<<<<<< HEAD
 			using (Ping p = new Ping()) 
 			{
 				int[] pings = new int[10];
@@ -116,6 +135,10 @@ namespace Whats_My_IP
 					zwischensumme = zwischensumme+pings[i];
 				}
 				ping = zwischensumme/pings.Length;
+=======
+			using (Ping p = new Ping()) {
+				ping = Convert.ToInt32(p.Send(bHost).RoundtripTime);
+>>>>>>> parent of b3eefd5... v1.3.1 BETA
 			}
 			return ping;
 		}
@@ -133,12 +156,12 @@ namespace Whats_My_IP
 			pictureBox_Flag.ImageLocation = "http://flagpedia.net/data/flags/small/"+aInfo[2].ToLower()+".png";
 		}
 		
-		void BackgroundWorker_MainDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+		void BackgroundWorker_GetIPDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			BackgroundWorker worker = sender as BackgroundWorker;
 			
-			/*try 
-			{*/
+			try 
+			{
 				//Hole und konvertiere die Json
 				toolStripStatusLabel_Status.Text = "Hole Json-Datei von \""+aHost+"\"...";
 				string[] aInfo = new string[3];
@@ -150,16 +173,19 @@ namespace Whats_My_IP
 				toolStripStatusLabel_Status.Text = "OK! ("+aPing.ToString()+" ms)";
 				//OK
 				toolStripStatusLabel_Status.Text = "Fertig! (Json-Host: \""+aHost+"\", Ping-Host: \""+bHost+"\")";
-			/*}
+			}
 			catch (Exception ex) 
 			{
-			
-			}*/
+				toolStripStatusLabel_Status.Text = "Fehler: "+ ex.Message;
+				MessageBox.Show(ex.Message, "Fehler!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				aHost="http://ip-api.com/json";
+			}
 			
 		}
 		
-		void BackgroundWorker_MainRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		void BackgroundWorker_GetIPRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
+<<<<<<< HEAD
 			if(e.Error == null)
 			{
 				RefreshUI();
@@ -170,7 +196,11 @@ namespace Whats_My_IP
 				toolStripStatusLabel_Status.Text = "Fehler: "+ e.Error.Message;
 				MessageBox.Show(e.Error.Message, "Fehler!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+=======
+			RefreshUI();
+>>>>>>> parent of b3eefd5... v1.3.1 BETA
 			aHost="http://ip-api.com/json";
+			button_GetIP.Enabled = true;
 		}
 		
 		void Button_PingHostClick(object sender, EventArgs e)//Öffne den PingHost-Form um den PingHost vom Benutzer zu krigen.

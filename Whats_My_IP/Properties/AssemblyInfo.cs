@@ -28,4 +28,8 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can use the default the Revision and 
 // Build Numbers by using the '*' as shown below:
+<<<<<<< HEAD
 [assembly: AssemblyVersion("1.3.2.*")]
+=======
+[assembly: AssemblyVersion("1.3.0.*")]
+>>>>>>> parent of b3eefd5... v1.3.1 BETA
