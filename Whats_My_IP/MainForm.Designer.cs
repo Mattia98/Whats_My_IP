@@ -42,13 +42,8 @@ namespace Whats_My_IP
 			this.groupBox_IPBox = new System.Windows.Forms.GroupBox();
 			this.statusStrip_Main = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel_Status = new System.Windows.Forms.ToolStripStatusLabel();
-<<<<<<< HEAD
-			this.button_Go = new System.Windows.Forms.Button();
-			this.backgroundWorker_Main = new System.ComponentModel.BackgroundWorker();
-=======
 			this.button_GetIP = new System.Windows.Forms.Button();
-			this.backgroundWorker_GetIP = new System.ComponentModel.BackgroundWorker();
->>>>>>> parent of b3eefd5... v1.3.1 BETA
+			this.backgroundWorker_Main = new System.ComponentModel.BackgroundWorker();
 			this.groupBox_ISPBox = new System.Windows.Forms.GroupBox();
 			this.label_ISP = new System.Windows.Forms.Label();
 			this.groupBox_LocationBox = new System.Windows.Forms.GroupBox();
@@ -96,7 +91,7 @@ namespace Whats_My_IP
 			this.groupBox_IPBox.Size = new System.Drawing.Size(179, 76);
 			this.groupBox_IPBox.TabIndex = 2;
 			this.groupBox_IPBox.TabStop = false;
-			this.groupBox_IPBox.Text = "IP:";
+			this.groupBox_IPBox.Text = "Your IP:";
 			// 
 			// statusStrip_Main
 			// 
@@ -115,20 +110,20 @@ namespace Whats_My_IP
 			this.toolStripStatusLabel_Status.Size = new System.Drawing.Size(40, 17);
 			this.toolStripStatusLabel_Status.Text = "Bereit!";
 			// 
-			// button_Go
+			// button_GetIP
 			// 
-			this.button_Go.Location = new System.Drawing.Point(12, 291);
-			this.button_Go.Name = "button_Go";
-			this.button_Go.Size = new System.Drawing.Size(75, 23);
-			this.button_Go.TabIndex = 1;
-			this.button_Go.Text = "GO!";
-			this.button_Go.UseVisualStyleBackColor = true;
-			this.button_Go.Click += new System.EventHandler(this.Button_GetIPClick);
+			this.button_GetIP.Location = new System.Drawing.Point(12, 291);
+			this.button_GetIP.Name = "button_GetIP";
+			this.button_GetIP.Size = new System.Drawing.Size(75, 23);
+			this.button_GetIP.TabIndex = 4;
+			this.button_GetIP.Text = "GO!";
+			this.button_GetIP.UseVisualStyleBackColor = true;
+			this.button_GetIP.Click += new System.EventHandler(this.Button_GetIPClick);
 			// 
-			// backgroundWorker_GetIP
+			// backgroundWorker_Main
 			// 
-			this.backgroundWorker_GetIP.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_GetIPDoWork);
-			this.backgroundWorker_GetIP.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_GetIPRunWorkerCompleted);
+			this.backgroundWorker_Main.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_MainDoWork);
+			this.backgroundWorker_Main.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_MainRunWorkerCompleted);
 			// 
 			// groupBox_ISPBox
 			// 
@@ -139,7 +134,7 @@ namespace Whats_My_IP
 			this.groupBox_ISPBox.Size = new System.Drawing.Size(515, 76);
 			this.groupBox_ISPBox.TabIndex = 3;
 			this.groupBox_ISPBox.TabStop = false;
-			this.groupBox_ISPBox.Text = "ISP:";
+			this.groupBox_ISPBox.Text = "Your ISP:";
 			// 
 			// label_ISP
 			// 
@@ -160,7 +155,7 @@ namespace Whats_My_IP
 			this.groupBox_LocationBox.Size = new System.Drawing.Size(515, 76);
 			this.groupBox_LocationBox.TabIndex = 4;
 			this.groupBox_LocationBox.TabStop = false;
-			this.groupBox_LocationBox.Text = "Location:";
+			this.groupBox_LocationBox.Text = "Your Location:";
 			// 
 			// label_Location
 			// 
@@ -181,7 +176,7 @@ namespace Whats_My_IP
 			this.groupBox_PingBox.Size = new System.Drawing.Size(213, 76);
 			this.groupBox_PingBox.TabIndex = 3;
 			this.groupBox_PingBox.TabStop = false;
-			this.groupBox_PingBox.Text = "Ping:";
+			this.groupBox_PingBox.Text = "Your Ping:";
 			// 
 			// label_Ping
 			// 
@@ -198,7 +193,7 @@ namespace Whats_My_IP
 			this.button_PingHost.Location = new System.Drawing.Point(407, 291);
 			this.button_PingHost.Name = "button_PingHost";
 			this.button_PingHost.Size = new System.Drawing.Size(120, 23);
-			this.button_PingHost.TabIndex = 3;
+			this.button_PingHost.TabIndex = 5;
 			this.button_PingHost.Text = "Anderen Ping-Hoster";
 			this.button_PingHost.UseVisualStyleBackColor = true;
 			this.button_PingHost.Click += new System.EventHandler(this.Button_PingHostClick);
@@ -219,7 +214,7 @@ namespace Whats_My_IP
 			this.button_Analize.Location = new System.Drawing.Point(281, 291);
 			this.button_Analize.Name = "button_Analize";
 			this.button_Analize.Size = new System.Drawing.Size(120, 23);
-			this.button_Analize.TabIndex = 2;
+			this.button_Analize.TabIndex = 7;
 			this.button_Analize.Text = "Andere IP Analysieren";
 			this.button_Analize.UseVisualStyleBackColor = true;
 			this.button_Analize.Click += new System.EventHandler(this.Button_AnalizeClick);
@@ -235,7 +230,7 @@ namespace Whats_My_IP
 			this.Controls.Add(this.groupBox_PingBox);
 			this.Controls.Add(this.groupBox_LocationBox);
 			this.Controls.Add(this.groupBox_ISPBox);
-			this.Controls.Add(this.button_Go);
+			this.Controls.Add(this.button_GetIP);
 			this.Controls.Add(this.statusStrip_Main);
 			this.Controls.Add(this.groupBox_IPBox);
 			this.Controls.Add(this.label_Ueberschrift);
@@ -265,13 +260,8 @@ namespace Whats_My_IP
 		private System.Windows.Forms.GroupBox groupBox_LocationBox;
 		private System.Windows.Forms.Label label_ISP;
 		private System.Windows.Forms.GroupBox groupBox_ISPBox;
-<<<<<<< HEAD
 		private System.ComponentModel.BackgroundWorker backgroundWorker_Main;
-		private System.Windows.Forms.Button button_Go;
-=======
-		private System.ComponentModel.BackgroundWorker backgroundWorker_GetIP;
 		private System.Windows.Forms.Button button_GetIP;
->>>>>>> parent of b3eefd5... v1.3.1 BETA
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_Status;
 		private System.Windows.Forms.StatusStrip statusStrip_Main;
 		private System.Windows.Forms.GroupBox groupBox_IPBox;
